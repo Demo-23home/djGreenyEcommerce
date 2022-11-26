@@ -20,6 +20,7 @@ class Product(models.Model):
     name=models.CharField(_("Name"), max_length=50)
     subtitle=models.CharField(_("Subtitle"),max_length=500)
     sku=models.IntegerField(_("Sku"))
+    image=models.ImageField(upload_to='products/')
     desc=models.TextField(_("Description"),max_length=1000)
     price=models.FloatField(_("Price"))
     flag=models.CharField(_('Flag'),max_length=10,choices=FLAG_OPTION)
@@ -32,8 +33,8 @@ class Product(models.Model):
         return self.name
 
 class ProductImages(models.Model):
-    product=models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='product_image/')
+    product = models.ForeignKey(Product,related_name='product_image',on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_image/')
 
     def __str__(self):
         return str(self.product)
